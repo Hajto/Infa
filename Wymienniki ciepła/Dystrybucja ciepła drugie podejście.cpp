@@ -1,57 +1,60 @@
 #include<iostream>
 #include<cstdio>
+#define MAX 1000
 
 using namespace std;
 
+//Liczy srędnią arytmetyczną z dwóch liczb
 double srednia(double a, double b){
     return (a+b)/2;
 }
 
+//Srednia z tablicy, podajemy tablice  i otrzymujemy srednia jej elementow
+double sredniaarray( double tablice[], int liczba_liczb){
+    //Średnia z jednej tablicy
+    double suma=0;
+        for(int i = 0; i < liczba_liczb; i++){
+            suma += tablice[i];
+        }
+    return suma/liczba_liczb;
+}
+// Wstrzymuje program do momentu wcisniecia klawisza enter, wcisniecie innego klawisza nie zaskutkuje jego zakonczeniem.
+void pauza(){
+    while ('\n' != getchar ());
+        printf ("Wcisnij enter aby zakonczyc prace programu.");
+        getchar ();
+}
+
+/*
+Program główny
+*/
+
 int main(){
-    double pojemnik_1[1000], pojemnik_2[1000];
+    // Dwa pojemniki, jeden z ciepłą wody drugi z zimną, daje im wielkosc tysiąc, ponieważ zadanie zakłada, że taka jest maksymalna ich liczba.
+    double pojemnik_1[MAX], pojemnik_2[MAX];
     int n=0;
-    printf("Podaj liczbe pojemnikow:");
-        cin>>n;
+    double temp;
+    printf("Podaj liczbe pojemnikow (od 2 do 1000):");
+        while(n < 2 || n> 1000){
+            scanf("%d",&n);
+            if(n < 2 || n> 1000) printf("Podana liczba musi byc wieksza lub rowna 2 i mniejsza lub rowna 1000, podaj ja jeszcze raz ");
+        }
         for(int i=0; i < n ; i++ ){
             pojemnik_1[i]=100;
             pojemnik_2[i]=0;
         }
-    double temp;
     //Mieszanie według fotki tablicy prog. Pawła K.
-    for(int i = n; i >= 0; i--){
-        for(int j = 0; j < n; j++){
-            temp = srednia(pojemnik_1[i], pojemnik_2[j]);
-           // cout<<"\n\t"<<pojemnik_1[i]<<"\t"<<pojemnik_2[j]<<"\t"<<temp<<"\n";
-            pojemnik_1[i]=temp;
-            pojemnik_2[j]=temp;
-           // cout<<"\t"<<temp<<"\t";
+        for(int i = n; i >= 0; i--){
+            for(int j = 0; j < n; j++){
+                temp = srednia(pojemnik_1[i], pojemnik_2[j]);
+                pojemnik_1[i]=temp;
+                pojemnik_2[j]=temp;
+            }
         }
-    }
-    cout<<"\n";
-
-    //W powyższym scope-ie jest błąd
 
     //Średnia z jednej tablicy
-    double suma=0,sredniaztablicy;
-    for(int i = 0; i < n; i++){
-        suma += pojemnik_1[i];
-        cout<<pojemnik_1[i]<<"\t";
-    }
-    sredniaztablicy = suma/n;
-    printf("\n\nSrednia temperatur wody w pojemnikach, ktore na poczatku mialy goraca wode wynosi: %.3f \n\n", sredniaztablicy);
+        printf("\nSrednia temperatur wody w pojemnikach, ktore na poczatku mialy zimna wode wynosi: %.3f \n", sredniaarray(pojemnik_2, n));
+        pauza();
 
-    //Średnia z drugiej tablicy
-suma=0;
-    for(int i = 0; i < n; i++){
-        suma += pojemnik_2[i];
-        cout<<pojemnik_2[i]<<"\t";
-    }
-    sredniaztablicy = suma/n;
-    printf("\n\nSrednia temperatur wody w pojemnikach, ktore na poczatku mialy zimna wode wynosi: %.3f \n", sredniaztablicy);
-
-    while ('\n' != getchar ());
-    printf ("Wcisnij enter aby zakonczyc prace programu.");
-    getchar ();
     return 0;
 }
-
