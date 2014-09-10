@@ -31,7 +31,7 @@ Program główny
 
 int main(){
     // Dwa pojemniki, jeden z ciepłą wody drugi z zimną, daje im wielkosc tysiąc, ponieważ zadanie zakłada, że taka jest maksymalna ich liczba.
-    double pojemnik_1[MAX], pojemnik_2[MAX];
+    double pojemnik_1[MAX], pojemnik_2[MAX]={0};
     int n=0;
     double temp;
     printf("Podaj liczbe pojemnikow (od 2 do 1000):");
@@ -39,12 +39,13 @@ int main(){
             scanf("%d",&n);
             if(n < 2 || n> 1000) printf("Podana liczba musi byc wieksza lub rowna 2 i mniejsza lub rowna 1000, podaj ja jeszcze raz ");
         }
-        for(int i=0; i < n ; i++ ){
+        /*for(int i=0; i < n ; i++ ){
             pojemnik_1[i]=100;
             pojemnik_2[i]=0;
-        }
+        }*/
     //Mieszanie według fotki tablicy prog. Pawła K.
-        for(int i = n; i >= 0; i--){
+        for(int i = n; i > 0; i--){
+                pojemnik_1[i]=100;
             for(int j = 0; j < n; j++){
                 temp = srednia(pojemnik_1[i], pojemnik_2[j]);
                 pojemnik_1[i]=temp;
