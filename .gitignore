@@ -12,6 +12,7 @@ $RECYCLE.BIN/
 *.cab
 *.msi
 *.msm
+*.exe
 *.msp
 
 # =========================
@@ -26,8 +27,7 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
-
+Icon 
 # Thumbnails
 ._*
 
